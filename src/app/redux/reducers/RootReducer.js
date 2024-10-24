@@ -6,9 +6,8 @@ import ScrumBoardReducer from "./ScrumBoardReducer";
 import NotificationReducer from "./NotificationReducer";
 import EcommerceReducer from "./EcommerceReducer";
 import EmployeeReducer from "./EmployeeReducer";
-import ProvinceReducer from "./ProvinceReducer";
-import DistrictReducer from "./DistrictReducer";
-import WardReducer from "./WardReducer";
+import CertificateReducer from "./CertificateReducer"
+import FamilyReducer from "./FamilyReducer"
 
 const RootReducer = combineReducers({
   login: LoginReducer,
@@ -18,9 +17,8 @@ const RootReducer = combineReducers({
   notification: NotificationReducer,
   ecommerce: EcommerceReducer,
   employee: EmployeeReducer,
-  province: ProvinceReducer,
-  district: DistrictReducer,
-  ward: WardReducer,
+  certificate: CertificateReducer,
+  family: FamilyReducer
 });
 
 export default RootReducer;

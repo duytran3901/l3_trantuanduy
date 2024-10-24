@@ -6,44 +6,61 @@ import EgretVerticalNavExpansionPanel from "./EgretVerticalNavExpansionPanel";
 import { withStyles } from "@material-ui/styles";
 import { useTranslation, withTranslation, Trans } from "react-i18next";
 import ConstantList from "../../../app/appConfig.js";
+import localStorageService from "app/services/localStorageService";
 const ViewEgretVerticalNavExpansionPanel = withTranslation()(
   EgretVerticalNavExpansionPanel
 );
-const styles = theme => ({
+const styles = (theme) => ({
   expandIcon: {
     transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
-    transform: "rotate(90deg)"
+    transform: "rotate(90deg)",
   },
   collapseIcon: {
     transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
-    transform: "rotate(0deg)"
-  }
+    transform: "rotate(0deg)",
+  },
 });
 
 class EgretVerticalNav extends Component {
   state = {
-    collapsed: true
+    collapsed: true,
+    currentRole: [],
   };
-
-  renderLevels = data => {
+  componentDidMount() {
+    const currentRole = localStorageService.getItem("jwt_role");
+    this.setState({ currentRole });
+  }
+  hasRole = (role) => {
+    const { currentRole } = this.state;
+    return currentRole && currentRole.some((item) => item.authority === role);
+  };
+  renderLevels = (data) => {
     const { t, i18n, classes } = this.props;
-    return data.map((item, index) => {
-      if (
-        item.path && item.path.length > 0 &&
-        !item.path.startsWith(ConstantList.ROOT_PATH)
-      ) {
-        item.path = ConstantList.ROOT_PATH + item.path;
-      }
-      let visible = item.isVisible;
-      if (item.children && item.children.length > 0) {
-        return (
-          <ViewEgretVerticalNavExpansionPanel item={item} key={index}>
-            {this.renderLevels(item.children)}
-          </ViewEgretVerticalNavExpansionPanel>
-        );
-      } else if (visible) {
-        if (item.path == null) {
-          item.path = "";
+
+    return data
+      .filter((item) => item.isVisible)
+      .map((item, index) => {
+        if (item.role && !this.hasRole(item.role)) {
+          return null;
+        }
+        if (
+          item.path &&
+          item.path.length > 0 &&
+          !item.path.startsWith(ConstantList.ROOT_PATH)
+        ) {
+          item.path = ConstantList.ROOT_PATH + item.path;
+        }
+        let visible = item.isVisible;
+        if (item.children && item.children.length > 0) {
+          return (
+            <ViewEgretVerticalNavExpansionPanel item={item} key={index}>
+              {this.renderLevels(item.children)}
+            </ViewEgretVerticalNavExpansionPanel>
+          );
+        } else if (visible) {
+          if (item.path == null) {
+            item.path = "";
+          }
         }
         return (
           <NavLink key={index} to={item.path} className="nav-item">
@@ -71,8 +88,7 @@ class EgretVerticalNav extends Component {
             </TouchRipple>
           </NavLink>
         );
-      }
-    });
+      });
   };
 
   handleClick = () => {

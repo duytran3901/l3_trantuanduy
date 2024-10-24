@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import RootReducer from "./reducers/RootReducer";
 import HttpService from "app/services/HttpService";
 import createSagaMiddleware from "@redux-saga/core";
-import rootSagaWatcher from "./actions/rootSagaWatcher";
+import rootSagaWatcher from "./sagas/rootSagaWatcher";
 const initialState = {};
 
 const sagaMiddleware = createSagaMiddleware();

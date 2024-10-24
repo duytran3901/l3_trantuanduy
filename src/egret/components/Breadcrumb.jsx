@@ -6,15 +6,15 @@ import ConstantList from "../../app/appConfig";
 const Breadcrumb = ({ routeSegments }) => {
   return (
     <div className="flex flex-middle position-relative">
-      {routeSegments ? (
+      {/* {routeSegments ? (
         <Fragment>
           <h4 className="m-0 pb-2 font-size-16 capitalize text-middle">
             {routeSegments[routeSegments.length - 1]["name"]}
           </h4>
           <h4 className="m-0 pb-2 ml-8 text-hint">|</h4>
         </Fragment>
-      ) : null}
-      <NavLink to={ConstantList.ROOT_PATH}>
+      ) : null} */}
+      <NavLink to={ConstantList.ROOT_PATH + "home"}>
         <Icon className="text-middle ml-8 mb-1" color="primary">
           home
         </Icon>

@@ -3,7 +3,9 @@ import { Redirect } from "react-router-dom";
 import ConstantList from "./appConfig";
 import homeRoutes from "./views/home/HomeRoutes";
 import sessionRoutes from "./views/sessions/SessionRoutes";
-import Employee from "./views/Employee/EmployeeRoutes"
+import AddEmployeeRoutes from "./views/Employee/AddEmployee/AddEmployeeRoutes"
+import ManageEmployeeRoutes from "./views/Employee/ManageEmployee/ManageEmployeeRoutes"
+import EndEmployeeRoutes from "./views/Employee/EndEmployee/EndEmployeeRoutes"
 
 const redirectRoute = [
   {
@@ -22,9 +24,10 @@ const errorRoute = [
 const routes = [
   ...homeRoutes,
   ...sessionRoutes,
-  ...Employee,
+  ...AddEmployeeRoutes,
+  ...ManageEmployeeRoutes,
+  ...EndEmployeeRoutes,
   ...errorRoute,
-
 ];
 
 export default routes;
