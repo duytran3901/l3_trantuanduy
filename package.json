@@ -26,7 +26,6 @@
     "echarts": "^4.2.1",
     "echarts-for-react": "^2.0.15-beta.0",
     "file-saver": "^2.0.2",
-    "firebase": "^6.6.1",
     "history": "^4.10.0",
     "i18next": "^19.9.2",
     "i18next-browser-languagedetector": "^4.0.2",
@@ -109,5 +108,8 @@
     "axios-mock-adapter": "^1.17.0",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.1.1"
+  },
+  "engines": {
+    "node": "12.16.1"
   }
 }
